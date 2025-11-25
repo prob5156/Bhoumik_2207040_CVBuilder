@@ -1,6 +1,6 @@
 package com.example.cvbuilder1.controller;
 
-import com.example.cvbuilder1.JUtil.C; // Updated import
+import com.example.cvbuilder1.JUtil.C;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +13,17 @@ import javafx.event.ActionEvent;
 
 public class CvController
 {
+    // STATIC fields to hold the data across scene loads
+    private static String name;
+    private static String email;
+    private static String phone;
+    private static String address;
+    private static String summary;
+    private static String education;
+    private static String experience;
+    private static String skills;
+    // END STATIC fields
+
     private final C a = new C();
 
     @FXML private TextField tfName;
@@ -24,6 +35,21 @@ public class CvController
     @FXML private TextArea taEducation;
     @FXML private TextArea taExperience;
     @FXML private TextArea taSkills;
+
+    @FXML
+    public void initialize() {
+        // Load data if available (e.g., after coming back from preview)
+        if (name != null) {
+            tfName.setText(name);
+            tfEmail.setText(email);
+            tfPhone.setText(phone);
+            tfAddress.setText(address);
+            taSummary.setText(summary);
+            taEducation.setText(education);
+            taExperience.setText(experience);
+            taSkills.setText(skills);
+        }
+    }
 
     private boolean b()
     {
@@ -47,15 +73,28 @@ public class CvController
         return true;
     }
 
+    private void c()
+    {
+        name = tfName.getText();
+        email = tfEmail.getText();
+        phone = tfPhone.getText();
+        address = tfAddress.getText();
+        summary = taSummary.getText();
+        education = taEducation.getText();
+        experience = taExperience.getText();
+        skills = taSkills.getText();
+    }
+
     @FXML
     private void goBack(ActionEvent a)
     {
+        c(); // Save data before leaving
         try
         {
             FXMLLoader b = new FXMLLoader(getClass().getResource("/com/example/cvbuilder1/home.fxml"));
-            Parent c = b.load();
-            Stage d = (Stage)((javafx.scene.Node)a.getSource()).getScene().getWindow();
-            d.setScene(new Scene(c));
+            Parent d = b.load();
+            Stage e = (Stage)((javafx.scene.Node)a.getSource()).getScene().getWindow();
+            e.setScene(new Scene(d));
         }
         catch (Exception e)
         {
@@ -71,25 +110,27 @@ public class CvController
             return;
         }
 
+        c(); // Save data before switching scenes
+
         try
         {
             FXMLLoader b = new FXMLLoader(getClass().getResource("/com/example/cvbuilder1/preview.fxml"));
-            Parent c = b.load();
+            Parent d = b.load();
 
-            PreviewController d = b.getController();
-            d.setData(
-                    tfName.getText(),
-                    tfEmail.getText(),
-                    tfPhone.getText(),
-                    tfAddress.getText(),
-                    taSummary.getText(),
-                    taEducation.getText(),
-                    taExperience.getText(),
-                    taSkills.getText()
+            PreviewController e = b.getController();
+            e.setData(
+                    name, // Use static data
+                    email,
+                    phone,
+                    address,
+                    summary,
+                    education,
+                    experience,
+                    skills
             );
 
-            Stage e = (Stage)((javafx.scene.Node)a.getSource()).getScene().getWindow();
-            e.setScene(new Scene(c));
+            Stage f = (Stage)((javafx.scene.Node)a.getSource()).getScene().getWindow();
+            f.setScene(new Scene(d));
 
         }
         catch (Exception e)
@@ -107,19 +148,21 @@ public class CvController
             return;
         }
 
+        c(); // Save data locally before saving to DB
+
         this.a.b(
-                tfName.getText(),
-                tfEmail.getText(),
-                tfPhone.getText(),
-                tfAddress.getText(),
-                taSummary.getText(),
-                taEducation.getText(),
-                taExperience.getText(),
-                taSkills.getText(),
+                name,
+                email,
+                phone,
+                address,
+                summary,
+                education,
+                experience,
+                skills,
                 b ->
                 {
                     Alert c = new Alert(Alert.AlertType.INFORMATION);
-                    c.setHeaderText("Success");
+                    c.setHeaderText("#90A4AE Success #1ABC9C");
                     c.setContentText("CV saved with ID: " + b.a());
                     c.show();
                 },
@@ -131,7 +174,7 @@ public class CvController
     {
         a.printStackTrace();
         Alert b = new Alert(Alert.AlertType.ERROR, a.getMessage());
-        b.setHeaderText("Database Error");
+        b.setHeaderText("#C0392B Database Error #ECF0F1");
         b.showAndWait();
     }
 }

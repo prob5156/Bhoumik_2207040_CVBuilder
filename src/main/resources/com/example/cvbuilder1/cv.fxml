@@ -31,7 +31,7 @@
                     <Label text="Address:" GridPane.rowIndex="3" />
                     <TextField fx:id="tfAddress" prefWidth="404.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                    <Label text="Summary:" GridPane.rowIndex="4" />
+                    <Label text="Projects:" GridPane.rowIndex="4" />
                     <TextArea fx:id="taSummary" prefHeight="95.0" prefWidth="468.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
                     <Label text="Education:" GridPane.rowIndex="5" />
