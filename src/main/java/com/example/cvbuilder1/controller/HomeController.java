@@ -7,16 +7,37 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-public class HomeController {
+public class HomeController
+{
 
     @FXML
-    private void openCvBuilder(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cvbuilder1/cv.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage)((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
+    private void openCvBuilder(ActionEvent a)
+    {
+        try
+        {
+            FXMLLoader b = new FXMLLoader(getClass().getResource("/com/example/cvbuilder1/cv.fxml"));
+            Parent c = b.load();
+            Stage d = (Stage)((javafx.scene.Node)a.getSource()).getScene().getWindow();
+            d.setScene(new Scene(c));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openCvList(ActionEvent a)
+    {
+        try
+        {
+            FXMLLoader b = new FXMLLoader(getClass().getResource("/com/example/cvbuilder1/list.fxml"));
+            Parent c = b.load();
+            Stage d = (Stage)((javafx.scene.Node)a.getSource()).getScene().getWindow();
+            d.setScene(new Scene(c));
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

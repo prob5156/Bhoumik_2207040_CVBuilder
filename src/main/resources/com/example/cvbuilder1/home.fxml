@@ -19,4 +19,9 @@
             text="Create CV"
             styleClass="home-button" />
 
+    <Button fx:id="btnList"
+            onAction="#openCvList"
+            text="View Saved CVs"
+            styleClass="home-button" />
+
 </VBox>
